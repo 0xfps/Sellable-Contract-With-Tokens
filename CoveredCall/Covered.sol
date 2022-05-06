@@ -16,6 +16,7 @@ contract Sellable is Owned
 {
     // isOwner from Owned.
     bool private on_sale = false;
+    uint256 private contract_price;
 
     function depositTokens(address _token, uint256 _amount) public isOwner
     {
@@ -32,9 +33,11 @@ contract Sellable is Owned
 
 
 
-    function placeOnSale() public isOwner
+    function placeOnSaleInGwei(uint256 _amount) public isOwner
     {
+        require((_amount * 10e9) <= 8 ether, "Amount must be <= 8 ether.");
         on_sale = !on_sale;
+        contract_price = _amount * 10e9;
     }
 
     function bidContract() public payable{}
