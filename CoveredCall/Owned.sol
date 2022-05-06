@@ -9,26 +9,26 @@ pragma solidity >=0.6.0;
 
 contract Owned
 {
-    address private owner;
+    address internal contract_owner;
 
-    event TransferOwnership(address, address);
+    event MoveOwnership(address, address);
 
     constructor()
     {
-        owner = msg.sender;  
-        emit TransferOwnership(address(0), msg.sender);
+        contract_owner = msg.sender;  
+        emit MoveOwnership(address(0), msg.sender);
     }
 
     modifier isOwner()
     {
-        require(msg.sender == owner, "!Owner");
+        require(msg.sender == contract_owner, "!Owner");
         _;
     }
 
-    function transferOwnership(address new_owner) public isOwner
+    function moveOwnership(address new_contract_owner) public isOwner
     {
-        require(new_owner != address(0), "0 Address");
-        owner = new_owner;
-        emit TransferOwnership(msg.sender, new_owner);
+        require(new_contract_owner != address(0), "0 Address");
+        contract_owner = new_contract_owner;
+        emit MoveOwnership(msg.sender, new_contract_owner);
     }
 }
