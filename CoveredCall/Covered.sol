@@ -242,4 +242,24 @@ contract Sellable is Owned
 
         delete token;
     }
+
+
+
+
+    /*
+    * @dev:
+    *
+    * Owner of contract wants to destroy tokens available.
+    * Transfers tokens to the owner and deletes token.
+    */
+
+    function destructTokens() public isOwner
+    {
+        require(!on_sale, "Contract on sale");
+        require(stored_contract_tokens > 0, "This contract has no stored tokens");
+        
+        token.transfer(msg.sender, stored_contract_tokens);
+
+        delete token;
+    }
 }
