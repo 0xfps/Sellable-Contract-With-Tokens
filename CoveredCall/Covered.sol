@@ -28,7 +28,7 @@ contract Sellable is Owned
     bool private on_sale = false;
 
 
-    // The highest bid, highest bidder
+    // The highest bid, highest bidder.
 
     uint256 private highest_bid;
     address private highest_bidder;
@@ -40,6 +40,27 @@ contract Sellable is Owned
 
 
 
+
+    /*
+    * @dev:
+    *
+    * Checks if the token to be stored in the contract passes 2 tests:
+    *
+    * -> The current token must be none.
+    * -> The new token to be added must be the same with the existing token.
+    *
+    * Returns true if one of the conditions is met.
+    * 
+    *
+    * @param:
+    *
+    * IERC20 __token.
+    * 
+    *
+    * @return:
+    * 
+    * bool.
+    */
 
     function canDeposit(IERC20 __token) public view returns(bool)
     {
@@ -62,6 +83,11 @@ contract Sellable is Owned
     * The contract must not be on sale for this function to be called.
     *
     * There cannot be two different tokens in the account.
+    * 
+    *
+    * @param:
+    *
+    * address __token, uint256 _amount.
     */
 
     function depositTokens(address _token, uint256 _amount) public isOwner
@@ -93,6 +119,11 @@ contract Sellable is Owned
     * Turns on `on_sale` to true.
     *
     * The contract must have a minimum of tokens before it can be listed for sale, say 100.
+    * 
+    *
+    * @param:
+    *
+    * uint256 _amount.
     */
 
     function placeOnSaleInGwei(uint256 _amount) public isOwner
