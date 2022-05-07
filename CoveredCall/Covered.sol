@@ -36,7 +36,7 @@ contract Sellable is Owned
     uint256 private contract_price;
     uint256 private stored_contract_tokens;
 
-    IERC20 token = IERC20(0xB57ee0797C3fc0205714a577c02F7205bB89dF30);
+    IERC20 token;
 
 
 
