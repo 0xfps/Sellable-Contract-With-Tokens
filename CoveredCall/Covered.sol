@@ -10,6 +10,12 @@ import "./Owned.sol";
 * @dev: 
 * This smart contract involves an contract_owner depositing tokens into the smart contract, then he can list the smart contract for sale.
 * The buyer then purchases the smart contract and can take the tokens in the smart contract.
+*
+* O W N   C O N T R A C T .
+* D E P O S I T   T O K E N S   I N   T H E   C O N T R A C T .
+* L I S T   T H E   C O N T R A C T   F O R   S A L E.
+* B U Y   C O N T R A C T   A N D   B E C O M E   O W N E R.
+* W I T H D R A W   T O K E N S.
 */
 
 contract Sellable is Owned
@@ -30,6 +36,19 @@ contract Sellable is Owned
     uint256 private contract_price;
     uint256 private stored_contract_tokens;
 
+    IERC20 token = IERC20(0xB57ee0797C3fc0205714a577c02F7205bB89dF30);
+
+
+
+
+    function canDeposit(IERC20 __token) public view returns(bool)
+    {
+        bool is_empty = (address(token) == address(0));
+        bool is_same_token = (token == IERC20(__token));
+        
+        return (is_empty || is_same_token);
+    }
+
 
 
 
@@ -41,16 +60,21 @@ contract Sellable is Owned
     *
     * The `contract_owner` must have some allowance given to himself on the tokens he wants to deposit.
     * The contract must not be on sale for this function to be called.
+    *
+    * There cannot be two different tokens in the account.
     */
 
     function depositTokens(address _token, uint256 _amount) public isOwner
     {
         require(!on_sale, "Contract is on sale");
         require(_token != address(0), "Zero token address");
+        require(canDeposit(IERC20(_token)), "You cannot have 2 different tokens in this contract, Withdraw existing tokens.");
 
-        IERC20 token = IERC20(_token);
+        token = IERC20(_token);
 
-        // Token holder will give contract some allowance after deployment.
+
+        // Token holder will give contract some allowance.
+
         require(token.allowance(msg.sender, address(this)) >= _amount, "You don't have enough allowance tokens.");
         token.transferFrom(msg.sender, address(this), _amount);
 
@@ -79,6 +103,7 @@ contract Sellable is Owned
         on_sale = !on_sale;
         contract_price = _amount;
     }
+
 
 
 
@@ -164,5 +189,26 @@ contract Sellable is Owned
 
         delete highest_bidder;
         delete highest_bid;
+    }
+
+
+
+
+    /*
+    * @dev:
+    *
+    * Allows the token owner to withdraw the tokens he has put in the contract.
+    * OR
+    * Allows the token owner to withdraw the tokens stored in the contrat after purchase.
+    */
+
+    function withdrawTokens() public isOwner
+    {
+        require(!on_sale, "Contract is on sale.");
+        require(stored_contract_tokens > 0, "This contract has no stored tokens");
+
+        token.transfer(msg.sender, stored_contract_tokens);
+
+        delete token;
     }
 }
