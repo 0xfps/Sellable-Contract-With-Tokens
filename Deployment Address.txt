@@ -1,2 +1,2 @@
-Sellable => https://rinkeby.etherscan.io/address/0xCF7965B83aC0228bA4c233EfAA559dcAadd02e31
+Sellable => https://rinkeby.etherscan.io/address/0xc3382848172102B2643BCEa5f95E06F096BB7b9c
 
