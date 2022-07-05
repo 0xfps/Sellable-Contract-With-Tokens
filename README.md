@@ -11,7 +11,3 @@ This contract alows the owner to fund it with his desired chice of tokens, then 
 ##
 
 **Deployed at:** https://rinkeby.etherscan.io/address/0xCF7965B83aC0228bA4c233EfAA559dcAadd02e31
-
----
-
-Nnaemeka.
