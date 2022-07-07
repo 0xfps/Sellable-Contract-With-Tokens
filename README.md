@@ -6,7 +6,7 @@ Culled from https://cryptomarketpool.com/getting-started-with-solidity/#block-ce
 
 ##
 
-This contract alows the owner to fund it with his desired chice of tokens, then sell it to the highest bidder, who then can withdraw the tokens in the contract and become the new owner and repeat the same process over.
+This contract alows the owner to fund it with his desired choice of tokens, then sell it to the highest bidder, who then can withdraw the tokens in the contract and become the new owner and repeat the same process over.
 
 ##
 
