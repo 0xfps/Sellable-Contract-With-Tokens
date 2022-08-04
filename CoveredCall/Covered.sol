@@ -7,7 +7,7 @@ import "./Owned.sol";
 
 /*
 * @title: Sellable smart contract, funded with tokens.
-* @author: Anthony (fps) https://github.com/fps8k.
+* @author: Anthony (fps) https://github.com/0xfps.
 * @dev: 
 * This smart contract involves an contract_owner depositing tokens into the smart contract, then he can list the smart contract for sale.
 * The buyer then purchases the smart contract and can take the tokens in the smart contract.
