@@ -6,24 +6,13 @@ pragma solidity >=0.6.0;
 * @author: Anthony (fps) https://github.com/0xfps.
 * @dev: 
 */
-
 contract Owned {
     address internal contract_owner;
+    
     event MoveOwnership(address, address);
-
+   
     /*
     * @dev:
-    *
-    * Initializes the `contract_owner` to whoever deployed the contract.
-    */
-    constructor() {
-        contract_owner = msg.sender;  
-        emit MoveOwnership(address(0), msg.sender);
-    }
-
-    /*
-    * @dev:
-    *
     * Validates that `msg.sender` is the contract owner.
     */
     modifier isOwner() {
@@ -33,12 +22,18 @@ contract Owned {
 
     /*
     * @dev:
-    *
+    * Initializes the `contract_owner` to whoever deployed the contract.
+    */
+    constructor() {
+        contract_owner = msg.sender;  
+        emit MoveOwnership(address(0), msg.sender);
+    }
+
+    /*
+    * @dev:
     * Moves ownership of conract from `contract_owner` to `new_contract_owner`.
     * 
-    *
     * @param:
-    * 
     * address new_contract_owner.
     */
     function moveOwnership(address new_contract_owner) public isOwner {
