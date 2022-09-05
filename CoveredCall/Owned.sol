@@ -2,7 +2,7 @@
 pragma solidity >=0.6.0;
 
 /*
-* @title: 
+* @title: Owned contract.
 * @author: Anthony (fps) https://github.com/0xfps.
 * @dev: 
 */
